@@ -1,38 +1,48 @@
-/*eslint react-hooks/exhaustive-deps: off */
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import { ColorfulMessage } from "./components/ColorfulMessage";
 
 const App = () => {
-  const [num, setNum] = useState(0);
-  const [faceShowFlag, setfaceShowFlag] = useState(false);
-  const onClickCountUp = () => {
-    setNum(num + 1);
-  };
-  const onClickSwithShowFlag = () => {
-    setfaceShowFlag(!faceShowFlag);
-  };
-
-  useEffect(() => {
-    if (num !== 0) {
-      if (num % 3 === 0) {
-        faceShowFlag || setfaceShowFlag(true);
-      } else {
-        faceShowFlag && setfaceShowFlag(false);
-      }
-    }
-  }, [num]);
-
+  const [incompleteTodos, setincompleteTodos] = useState([
+    "洗濯物を干す",
+    "お皿を洗う",
+  ]);
+  const [completeTodos, setcompleteTodos] = useState([
+    "ピアノを弾く",
+    "歯を磨く",
+  ]);
   return (
     <>
-      <h1 style={{ color: "red" }}>こんにちは！</h1>
-      <ColorfulMessage color="blue">お元気ですか？</ColorfulMessage>
-      <ColorfulMessage color="pink">元気です</ColorfulMessage>
-      <button onClick={onClickCountUp}>ボタン</button>
-      <br />
-      <button onClick={onClickSwithShowFlag}>on/off</button>
-      <p>{num}</p>
-      {faceShowFlag && <p>(^^)</p>}
+      <div className="input-area">
+        <input placeholder="TODOを入力" />
+        <button>追加</button>
+      </div>
+      <div className="incomplete-area">
+        <p className="title">未完了のTODO</p>
+        <ul>
+          {incompleteTodos.map((todo) => {
+            return (
+              <div key={todo} className="list-row">
+                <li>{todo}</li>
+                <button>完了</button>
+                <button>削除</button>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
+      <div className="complete-area">
+        <p className="title">完了のTODO</p>
+        <ul>
+          {completeTodos.map((todo) => {
+            return (
+              <div key={todo} className="list-row">
+                <li>{todo}</li>
+                <button>戻る</button>
+              </div>
+            );
+          })}
+        </ul>
+      </div>
     </>
   );
 };
