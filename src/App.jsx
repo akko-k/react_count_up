@@ -1,3 +1,4 @@
+/*eslint react-hooks/exhaustive-deps: off */
 import { useState, useEffect } from "react";
 import "./App.css";
 import { ColorfulMessage } from "./components/ColorfulMessage";
