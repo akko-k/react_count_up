@@ -6,6 +6,8 @@ const App = () => {
   const [incompleteTodos, setincompleteTodos] = useState([
     "洗濯物を干す",
     "お皿を洗う",
+    "お風呂に入る",
+    "遊ぶ",
   ]);
   const [completeTodos, setcompleteTodos] = useState([
     "ピアノを弾く",
@@ -22,6 +24,14 @@ const App = () => {
     settodoText("");
   };
 
+  const onClickDelete = (index) => {
+    const newTodos = [...incompleteTodos];
+    console.log(newTodos);
+    newTodos.splice(index, 1);
+    console.log(newTodos);
+    setincompleteTodos(newTodos);
+  };
+
   return (
     <>
       <div className="input-area">
@@ -35,12 +45,12 @@ const App = () => {
       <div className="incomplete-area">
         <p className="title">未完了のTODO</p>
         <ul>
-          {incompleteTodos.map((todo) => {
+          {incompleteTodos.map((todo, index) => {
             return (
               <div key={todo} className="list-row">
                 <li>{todo}</li>
                 <button>完了</button>
-                <button>削除</button>
+                <button onClick={() => onClickDelete(index)}>削除</button>
               </div>
             );
           })}
